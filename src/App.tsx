@@ -1,8 +1,17 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout.tsx'
+import Home from './pages/Home.tsx'
+import NotFound from './pages/NotFound.tsx'
+
 export default function App() {
   return (
-    <main>
-      <h1>My Portfolio</h1>
-      <p>Coming soon — portfolio &amp; blog.</p>
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
