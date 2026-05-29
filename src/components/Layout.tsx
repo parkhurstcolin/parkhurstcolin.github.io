@@ -1,5 +1,8 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import Container from "./Container";
+
+const navClass = ({ isActive }: { isActive: boolean }) =>
+  isActive ? "font-semibold text-blue-600" : "text-gray-600 hover:text-blue-600";
 
 export default function Layout() {
   return (
@@ -8,18 +11,18 @@ export default function Layout() {
         <Container>
           <div className="flex items-center justify-between py-4">
             <Link to="/" className="text-xl font-semibold text-gray-900">
-              Colin Parkhurst
+              CP
             </Link>
             <nav className="flex gap-6">
-              <Link to="/" className="text-gray-600 hover:text-gray-900">
+              <NavLink to="/" end className={navClass}>
                 Home
-              </Link>
-              <Link to="/blog" className="text-gray-600 hover:text-gray-900">
+              </NavLink>
+              <NavLink to="/blog" className={navClass}>
                 Blog
-              </Link>
-              <Link to="/projects" className="text-gray-600 hover:text-gray-900">
+              </NavLink>
+              <NavLink to="/projects" className={navClass}>
                 Projects
-              </Link>
+              </NavLink>
             </nav>
           </div>
         </Container>
