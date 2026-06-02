@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
-import ProjectCard from "./ProjectCard";
-import SectionHeading from "./SectionHeading";
+import ProjectCard from "../components/ProjectCard";
 import type { Project } from "../content";
 
-export default function FeaturedProjects() {
+export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
@@ -13,9 +11,7 @@ export default function FeaturedProjects() {
       .from("projects")
       .select("title, summary, tech_stack, live_url, repo_url, featured, impact")
       .eq("published", true)
-      .eq("featured", true)
       .order("sort_order")
-      .limit(3)
       .then(({ data }) => {
         const rows = (data ?? []).map((row) => ({
           title: row.title,
@@ -32,20 +28,8 @@ export default function FeaturedProjects() {
 
   return (
     <section className="py-16">
-      <SectionHeading
-        number="01"
-        title="Selected work"
-        className="mb-2"
-        action={
-          <Link
-            to="/projects"
-            className="font-mono text-[13px] text-accent hover:underline"
-          >
-            all projects →
-          </Link>
-        }
-      />
-      <div>
+      <h1 className="page-title">Projects</h1>
+      <div className="mt-8">
         {projects.map((project) => (
           <ProjectCard key={project.title} project={project} />
         ))}

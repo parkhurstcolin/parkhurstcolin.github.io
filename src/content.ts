@@ -33,29 +33,5 @@ export type Project = {
   liveUrl?: string;
   repoUrl?: string;
   featured: boolean;
+  impact?: string;
 };
-
-export const projects: Project[] = [
-  {
-    title: "Project One",
-    description: "A short placeholder description of what this project does.",
-    tech: ["React", "TypeScript", "Tailwind"],
-    liveUrl: "#",
-    repoUrl: "#",
-    featured: true,
-  },
-  {
-    title: "Project Two",
-    description: "Another placeholder project description goes right here.",
-    tech: ["Node.js", "PostgreSQL"],
-    repoUrl: "#",
-    featured: true,
-  },
-  {
-    title: "Project Three",
-    description: "A third placeholder project to fill out the list nicely.",
-    tech: ["React Native", "REST API"],
-    liveUrl: "#",
-    featured: true,
-  },
-];

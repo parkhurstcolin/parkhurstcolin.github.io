@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 
 type PostPreview = {
@@ -18,12 +19,17 @@ export default function Blog() {
   }, []);
 
   return (
-    <section className="py-12">
-      <h1 className="text-3xl font-bold text-gray-900">Blog</h1>
-      <ul className="mt-6 space-y-3">
+    <section className="py-16">
+      <h1 className="page-title">Blog</h1>
+      <ul className="mt-8 space-y-3">
         {posts.map((post) => (
-          <li key={post.slug} className="text-lg text-gray-700">
-            {post.title}
+          <li key={post.slug}>
+            <Link
+              to={`/blog/${post.slug}`}
+              className="text-lg text-ink-soft transition-colors hover:text-ink"
+            >
+              {post.title}
+            </Link>
           </li>
         ))}
       </ul>

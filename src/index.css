@@ -1,1 +1,77 @@
 @import "tailwindcss";
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/inter";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
+:root {
+  --paper: #f4f1ea;
+  --paper-2: #ebe7dd;
+  --card: #fbfaf6;
+  --ink: #20201d;
+  --ink-soft: #57544c;
+  --ink-faint: #8d897e;
+  --line: #ddd8cc;
+  --accent: #1d4ed8;
+  --accent-soft: #2563eb;
+  --green: #15803d;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1a1916;
+    --paper-2: #211f1b;
+    --card: #211f1b;
+    --ink: #ece9e1;
+    --ink-soft: #b3afa4;
+    --ink-faint: #7c7872;
+    --line: #34322c;
+    --accent: #7aa2ff;
+    --accent-soft: #93b4ff;
+    --green: #4ade80;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-green: var(--green);
+
+  --font-display: "Fraunces Variable", Fraunces, Georgia, serif;
+  --font-sans: "Inter Variable", Inter, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .tag {
+    @apply rounded-md border border-line bg-card px-3 py-1 font-mono text-[12.5px] text-ink-soft;
+  }
+  .label {
+    @apply font-mono text-[11px] uppercase tracking-[0.1em] text-ink-faint;
+  }
+  .link-muted {
+    @apply text-ink-soft transition-colors hover:text-ink;
+  }
+  .page-title {
+    @apply font-display text-4xl font-medium tracking-tight text-ink;
+  }
+}
