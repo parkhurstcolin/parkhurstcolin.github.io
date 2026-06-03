@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import { asBlocks } from "../lib/blocks";
+import { formatDate } from "../lib/format";
 import PostBody from "../components/PostBody";
 
 type PostRow = {
@@ -55,7 +56,7 @@ export default function Post() {
       <h1 className="page-title mt-6">{post.title}</h1>
       {post.published_at && (
         <p className="mt-2 font-mono text-xs text-ink-faint">
-          {new Date(post.published_at).toLocaleDateString()}
+          {formatDate(post.published_at)}
         </p>
       )}
       {post.excerpt && (
