@@ -70,10 +70,7 @@ export default function Home() {
             </li>
           ))}
         </ul>
-        <a
-          href="#toolkit"
-          className="font-mono text-[12.5px] text-accent hover:underline"
-        >
+        <a href="#toolkit" className="link-accent">
           +{moreCount} more →
         </a>
       </div>

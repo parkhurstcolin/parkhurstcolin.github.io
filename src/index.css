@@ -3,6 +3,7 @@
 @import "@fontsource-variable/inter";
 @import "@fontsource/jetbrains-mono/400.css";
 @import "@fontsource/jetbrains-mono/500.css";
+@import "@blocknote/mantine/style.css";
 
 :root {
   --paper: #f4f1ea;
@@ -15,6 +16,22 @@
   --accent: #1d4ed8;
   --accent-soft: #2563eb;
   --green: #15803d;
+
+  --bn-colors-editor-text: var(--ink);
+  --bn-colors-editor-background: var(--paper);
+  --bn-colors-menu-text: var(--ink);
+  --bn-colors-menu-background: var(--card);
+  --bn-colors-tooltip-text: var(--ink);
+  --bn-colors-tooltip-background: var(--card);
+  --bn-colors-hovered-text: var(--ink);
+  --bn-colors-hovered-background: var(--paper-2);
+  --bn-colors-selected-text: var(--paper);
+  --bn-colors-selected-background: var(--accent);
+  --bn-colors-disabled-text: var(--ink-faint);
+  --bn-colors-disabled-background: var(--paper-2);
+  --bn-colors-border: var(--line);
+  --bn-colors-side-menu: var(--ink-faint);
+  --bn-font-family: var(--font-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -74,4 +91,32 @@ body {
   .page-title {
     @apply font-display text-4xl font-medium tracking-tight text-ink;
   }
+  .input {
+    @apply w-full rounded-md border border-line bg-card px-3 py-2 font-mono text-sm text-ink outline-none focus:border-ink-faint;
+  }
+  .link-accent {
+    @apply font-mono text-[13px] text-accent hover:underline;
+  }
+}
+
+.bn-container,
+.bn-suggestion-menu {
+  font-family: var(--font-mono);
+}
+
+.bn-suggestion-menu {
+  max-height: 18rem;
+  overflow-y: auto;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.35);
+}
+
+.bn-container img,
+.bn-container [class*="media"],
+.post-body img,
+.post-body [class*="media"] {
+  max-width: 100% !important;
+  height: auto !important;
 }

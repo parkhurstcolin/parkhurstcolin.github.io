@@ -5,10 +5,7 @@ export default function NotFound() {
     <section className="py-16">
       <h1 className="page-title">404 — Not found</h1>
       <p className="mt-2 text-ink-soft">That page doesn’t exist.</p>
-      <Link
-        to="/"
-        className="mt-4 inline-block font-mono text-[13px] text-accent hover:underline"
-      >
+      <Link to="/" className="link-accent mt-4 inline-block">
         ← back home
       </Link>
     </section>

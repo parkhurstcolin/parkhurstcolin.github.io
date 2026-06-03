@@ -1,33 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { supabase } from "../lib/supabase";
+import type { Project } from "../content";
+import { getProjects } from "../lib/projects";
 import ProjectCard from "./ProjectCard";
 import SectionHeading from "./SectionHeading";
-import type { Project } from "../content";
 
 export default function FeaturedProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    supabase
-      .from("projects")
-      .select("title, summary, tech_stack, live_url, repo_url, featured, impact")
-      .eq("published", true)
-      .eq("featured", true)
-      .order("sort_order")
-      .limit(3)
-      .then(({ data }) => {
-        const rows = (data ?? []).map((row) => ({
-          title: row.title,
-          description: row.summary,
-          tech: row.tech_stack,
-          liveUrl: row.live_url,
-          repoUrl: row.repo_url,
-          featured: row.featured,
-          impact: row.impact,
-        }));
-        setProjects(rows);
-      });
+    getProjects({ featured: true, limit: 3 }).then(setProjects);
   }, []);
 
   return (
@@ -37,10 +19,7 @@ export default function FeaturedProjects() {
         title="Selected work"
         className="mb-2"
         action={
-          <Link
-            to="/projects"
-            className="font-mono text-[13px] text-accent hover:underline"
-          >
+          <Link to="/projects" className="link-accent">
             all projects →
           </Link>
         }

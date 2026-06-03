@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
-import { FaDownload } from "react-icons/fa6";
+import { FaDownload, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa6";
+import { SiLeetcode } from "react-icons/si";
 import Container from "./Container";
 
 const navClass = ({ isActive }: { isActive: boolean }) =>
@@ -37,7 +38,7 @@ export default function Layout() {
                 className="inline-flex items-center gap-1.5 rounded-lg bg-ink px-3.5 py-2 font-medium text-paper transition hover:-translate-y-px hover:opacity-90"
               >
                 <FaDownload className="h-3 w-3" />
-                Résumé
+                Resume
               </a>
             </nav>
           </div>
@@ -52,36 +53,44 @@ export default function Layout() {
         <Container>
           <div className="flex flex-wrap items-center justify-between gap-3 py-8 font-mono text-xs text-ink-faint">
             <span>© 2026 Colin Parkhurst</span>
-            <div className="flex gap-4">
+            <div className="flex items-center gap-4">
               <a
                 href="https://github.com/parkhurstcolin"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="GitHub"
+                title="GitHub"
                 className="link-muted"
               >
-                github
+                <FaGithub className="h-[18px] w-[18px]" />
               </a>
               <a
                 href="https://www.linkedin.com/in/colin-parkhurst-5a2542389/"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="LinkedIn"
+                title="LinkedIn"
                 className="link-muted"
               >
-                linkedin
+                <FaLinkedin className="h-[18px] w-[18px]" />
               </a>
               <a
                 href="https://leetcode.com/u/parkhurstcolin/"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="LeetCode"
+                title="LeetCode"
                 className="link-muted"
               >
-                leetcode
+                <SiLeetcode className="h-[18px] w-[18px]" />
               </a>
               <a
                 href="mailto:parkhurstcolin@gmail.com"
+                aria-label="Email"
+                title="Email"
                 className="link-muted"
               >
-                email
+                <FaEnvelope className="h-[18px] w-[18px]" />
               </a>
             </div>
           </div>

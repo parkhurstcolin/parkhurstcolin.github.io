@@ -31,10 +31,7 @@ export default function RecentPosts() {
         title="Writing"
         className="mb-2"
         action={
-          <Link
-            to="/blog"
-            className="font-mono text-[13px] text-accent hover:underline"
-          >
+          <Link to="/blog" className="link-accent">
             all posts →
           </Link>
         }

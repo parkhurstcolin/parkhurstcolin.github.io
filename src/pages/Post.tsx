@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
+import { asBlocks } from "../lib/blocks";
+import PostBody from "../components/PostBody";
 
 type PostRow = {
   title: string;
@@ -8,8 +10,6 @@ type PostRow = {
   content: unknown;
   published_at: string | null;
 };
-
-type Block = { type?: string; text?: string };
 
 export default function Post() {
   const { slug } = useParams();
@@ -38,24 +38,18 @@ export default function Post() {
         <p className="mt-2 text-ink-soft">
           That post doesn’t exist or isn’t published.
         </p>
-        <Link
-          to="/blog"
-          className="mt-4 inline-block font-mono text-[13px] text-accent hover:underline"
-        >
+        <Link to="/blog" className="link-accent mt-4 inline-block">
           ← all posts
         </Link>
       </section>
     );
   }
 
-  const blocks = Array.isArray(post.content) ? (post.content as Block[]) : [];
+  const blocks = asBlocks(post.content);
 
   return (
     <article className="py-16">
-      <Link
-        to="/blog"
-        className="font-mono text-[13px] text-accent hover:underline"
-      >
+      <Link to="/blog" className="link-accent">
         ← all posts
       </Link>
       <h1 className="page-title mt-6">{post.title}</h1>
@@ -69,22 +63,11 @@ export default function Post() {
           {post.excerpt}
         </p>
       )}
-      <div className="mt-8 max-w-2xl space-y-4">
-        {blocks.map((block, i) =>
-          block.type === "heading" ? (
-            <h2
-              key={i}
-              className="font-display text-2xl font-medium tracking-tight text-ink"
-            >
-              {block.text}
-            </h2>
-          ) : (
-            <p key={i} className="leading-relaxed text-ink">
-              {block.text}
-            </p>
-          ),
-        )}
-      </div>
+      {blocks && (
+        <div className="mt-8 max-w-md">
+          <PostBody content={blocks} />
+        </div>
+      )}
     </article>
   );
 }
