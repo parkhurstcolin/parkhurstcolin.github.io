@@ -2,9 +2,14 @@ name: Keep Supabase Alive
 
 on:
   schedule:
-    # Run at midnight (0 0 * *) on Sunday (0) and Friday(5)
-    - cron: '0 0 * * 0,5'
+    # Run every 2 days at 13:17 UTC. Supabase pauses after 7 days idle, and
+    # GitHub can delay or drop scheduled runs (worst at the top of the hour),
+    # so this leaves room for a couple of missed runs.
+    - cron: '17 13 */2 * *'
   workflow_dispatch:
+
+permissions:
+  contents: write # needed to push the keepalive commit below
 
 jobs:
   ping:
@@ -16,3 +21,17 @@ jobs:
             curl -fsS -X GET "${{ secrets.VITE_SUPABASE_URL }}/rest/v1/projects?select=id&limit=1" \
               -H "apikey: ${{ secrets.VITE_SUPABASE_ANON_KEY }}" \
               -H "Authorization: Bearer ${{ secrets.VITE_SUPABASE_ANON_KEY }}"
+
+      # GitHub auto-disables scheduled workflows after 60 days with no repo
+      # activity, so push an empty commit if the last one is 50+ days old.
+      # Pushes made with GITHUB_TOKEN don't trigger the Pages deploy.
+      - uses: actions/checkout@v4
+      - name: Keep repo active
+        run: |
+            last=$(git log -1 --format=%ct)
+            if [ $(( ($(date +%s) - last) / 86400 )) -ge 50 ]; then
+              git config user.name "github-actions[bot]"
+              git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+              git commit --allow-empty -m "chore: keepalive"
+              git push
+            fi
